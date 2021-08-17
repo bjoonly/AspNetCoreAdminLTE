@@ -1,0 +1,126 @@
+﻿@model AdminLTE.Models.ViewModels.EmployeeVM
+@{ Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml"; }
+
+@{ var title = "Add new employee";
+    ViewData["Title"] = "Employee | Add";}
+
+
+
+<form method="post" enctype="multipart/form-data">
+    @if (Model.Employee.Id != 0)
+    {
+        title = "Edit employee";
+        ViewData["Title"] = "Employee | Edit";
+        <input asp-for="Employee.Id" hidden />
+    }
+    <div class="container p-3  px-md-5">
+
+        <div class="form-group row ">
+            <h2 class="col">@title</h2>
+        </div>
+
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4 card-body ">
+
+                    @if (Model.Employee.Id != 0 && Model.Employee.Photo != null)
+                    {
+                        <div class="form-group col pt-2 px-0">
+                            <img src="@AdminLTE.ENV.ImagePath@Model.Employee.Photo" class="w-100 h-100 d-block" id="image" alt="Employee" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group col pt-2 px-0">
+                            <img src="@AdminLTE.ENV.DefaultUserImagePath" class="w-100 h-100 d-block" id="image" alt="Employee" />
+                        </div>
+                    }
+                </div>
+                <div class="col-md-8 px-0">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="form-group col ">
+                                <label asp-for="Employee.Name"></label>
+                                <input asp-for="Employee.Name" class="form-control" placeholder="Enter name" />
+                                <span class="text-danger" asp-validation-for="Employee.Name"></span>
+                            </div>
+                            <div class="form-group col ">
+                                <label asp-for="Employee.Surname"></label>
+                                <input asp-for="Employee.Surname" class="form-control" placeholder="Enter surname" />
+                                <span class="text-danger" asp-validation-for="Employee.Surname"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col px-0">
+                            <label asp-for="Employee.Patronymic"></label>
+                            <input asp-for="Employee.Patronymic" class="form-control" placeholder="Enter patronymic" />
+                            <span class="text-danger" asp-validation-for="Employee.Patronymic"></span>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col ">
+                                <label asp-for="Employee.Phone"></label>
+                                <input asp-for="Employee.Phone" class="form-control" placeholder="Enter phone number" />
+                                <span class="text-danger" asp-validation-for="Employee.Phone"></span>
+                            </div>
+                            <div class="form-group col ">
+                                <label asp-for="Employee.TerritorialCommunityId"></label>
+                                <select asp-for="Employee.TerritorialCommunityId" asp-items="@Model.TerritorialCommunitySelectList" class="form-control">
+                                    <option selected disabled>--Select territorial community--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer col bg-transparent">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <input type="file" name="files" id="upload" class="form-control " onchange="readURL(this);"/>
+                    </div>
+                    <div class="row col ">
+
+                        <div class="col px-1">
+                            @if (Model.Employee.Id != 0)
+                            {
+                                <input type="submit" class="btn btn-success col" value="Update" /> }
+                            else
+                            {
+                                <input type="submit" class="btn btn-success col" value="Create" />}
+                        </div>
+                        <div class="col pr-0 ">
+                            <a asp-action="Index" class="btn btn-info col"> Back</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image')
+                        .attr('src', e.target.result)
+                       
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+
+
+@{
+    <partial name="_ValidationScriptsPartial" />
+}

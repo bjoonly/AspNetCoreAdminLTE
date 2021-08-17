@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AdminLTE.Models.TerritorialCommunity>
+@{ Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+    ViewData["Title"] = "Territorial communities";}
+
+<div class="container p-0">
+    <div class="row pt-4">
+        <div class="col-md-8  text-center text-md-left">
+            <h2 class="text-dark  ">
+                List of territorial communities
+            </h2>
+        </div>
+        <div class="col-md-4 text-center text-md-right">
+            <a class="btn btn-success " asp-controller="TerritorialCommunity" asp-action="Upsert"> Add new employee</a>
+        </div>
+    </div>
+
+   
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped my-3 ">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Area
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td width="35%">@item.Name</td>
+                        <td>@item.Area</td>
+                        <td width="40%">
+                            <div class="row px-2">
+
+                                <a class="btn btn-warning col mx-1 mx-lg-3" asp-route-Id="@item.Id" asp-controller="TerritorialCommunity" asp-action="Upsert">Edit</a>
+                                <a class="btn btn-danger col mx-1 mx-lg-3" asp-route-Id="@item.Id" asp-controller="TerritorialCommunity" asp-action="Delete">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+}
+            </tbody>
+        </table> }
+    else
+    {
+        <p>No territorial community found.</p>}
+</div>

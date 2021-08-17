@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AdminLTE.Models.Employee>
+@{ Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+    ViewData["Title"] = "Employees";
+}
+
+<div class="container p-0">
+    <div class="row pt-4">
+        <div class="col-md-6 px-0 text-center text-md-left">
+            <h2 class="text-dark  ">List of employees</h2>
+        </div>
+        <div class="col-md-6  px-0 text-center text-md-right">
+            <a class="btn btn-success " asp-controller="Employee" asp-action="Upsert"> Add new employee</a>
+        </div>
+    </div>
+         @if (Model.Count() > 0)
+         {
+            <div class="row justify-content-md-between justify-content-center py-3" >
+                @foreach (var item in Model)
+                 {
+                      <partial name="_EmployeeCard" model="item" />}
+             </div>
+          }
+          else
+          {
+            <p>No employees found</p>
+           }
+</div>

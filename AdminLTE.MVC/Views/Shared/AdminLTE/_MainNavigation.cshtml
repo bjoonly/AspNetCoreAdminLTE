@@ -1,0 +1,80 @@
+﻿@using static AdminLTE.MVC.Helpers.NavigationIndicatorHelper;
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="~/Home" class="brand-link">
+        <img src="~/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+    <div class="sidebar">
+    
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item ">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link @Url.MakeActiveClass("home","index")">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Home
+                        </p>
+                    </a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                         <li class="nav-item">
+                             <a  class="nav-link">
+                                 <i class="nav-icon fas fa-users"></i>
+                                 <p>
+                                     Emoloyees
+                                     <i class="right fas fa-angle-left"></i>
+                                 </p>
+                             </a>
+                             <ul class="nav nav-treeview" style="display: none;">
+                                 <li class="nav-item">
+                                     <a asp-area="" asp-controller="Employee" asp-action="Index" class="nav-link">
+                                         <i class="far fa-circle nav-icon"></i>
+                                         <p>All</p>
+                                     </a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a asp-area="" asp-controller="Employee" asp-action="Upsert" class="nav-link">
+                                         <i class="far fa-circle nav-icon"></i>
+                                         <p>Add</p>
+                                     </a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a asp-area="" asp-controller="Employee" asp-action="Edit" class="nav-link">
+                                         <i class="far fa-circle nav-icon"></i>
+                                         <p>Edit</p>
+                                     </a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a asp-area="" asp-controller="Employee" asp-action="Delete" class="nav-link">
+                                         <i class="far fa-circle nav-icon"></i>
+                                         <p>Remove</p>
+                                     </a>
+                                 </li>
+
+                             </ul>
+                         </li>
+                         <li class="nav-item">
+                             <a asp-area="" asp-controller="TerritorialCommunity" asp-action="Index" class="nav-link">
+                                 <i class="nav-icon fas fa-place-of-worship"></i>
+                                 <p>
+                                     Territorial Comunities                        
+                                 </p>
+                             </a>                
+                         </li>
+                        
+                        
+                         <li class="nav-item ">
+                             <a asp-controller="Home" asp-action="Privacy" class="nav-link @Url.MakeActiveClass("home","privacy")">
+                                 <i class="nav-icon fas fa-lock"></i>
+                                 <p>
+                                     Privacy
+                                 </p>
+                             </a>
+                         </li>
+                         }
+                                 </ul>
+                             </nav>
+    </div>
+</aside>
